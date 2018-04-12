@@ -110,12 +110,11 @@
             var tweet = streams.home[i];
             var post = $('<div></div>').css({'width':'604px','background-color':'transparent'})
             $(post).appendTo($body);
-            var time = $('<div></div>').css({'font-family':'\'Krungthep\'','float':'left','font-size':'20pt','width':'120px','height':'60px','padding':'10px 20px 5px 20px','border-bottom':'3px solid #cecece','color':'#cecece','margin-right':'20px'})
-            var date = tweet.created_at
+            var time = $('<div></div>').css({'font-family':'\'Krungthep\'','float':'left','font-size':'18pt','width':'120px','padding':'0 20px 12px 20px','border-bottom':'3px solid #cecece','border-radius':'8px','color':'#cecece','margin-right':'20px'})
             var name = $('<div></div>').css({'font-family':'\'Krungthep\'','margin-top':'30px','font-size':'18pt','color':'black'})
             $(name).find('img').css({'float':'left','margin-top':'6px','margin-right':'8px'})
             var comment = $('<div></div>').css({'font-family':'\'Krungthep\'','width':'340px','margin-top':'12px','margin-left':'200px','padding':'0 30px','border-radius':'22px','border':'2px solid black','overflow':'hidden','font-size':'18pt','color':'black'})
-            $(time).text(date.toLocaleTimeString('it-IT'))
+            $(time).text(date.toLocaleTimeString('en-US'))
             $(name).text('@' + tweet.user + ' -')
             $(comment).text(tweet.message)
             $(time).appendTo(post)
