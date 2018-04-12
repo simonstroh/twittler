@@ -11,6 +11,25 @@
     .page {
       max-width: 604px;
       margin: 0 auto;
+      margin-bottom: 100px;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 30px;
+    }
+    .back-to-top p {
+      font-family: "Krungthep";
+      font-size: 12pt;
+      padding: 0;
+      margin: 0;
+    }
+    a {
+      text-align: right;
+      color: black;
+      text-decoration: none;
     }
     .wrapper {
       width: 604px;
@@ -74,12 +93,19 @@
       cursor: pointer;
       float: right;
       padding: 0 20px;
+      transition: 0.3s;
     }
     </style>
   </head>
   <body>
     <div class="page">
     </div>
+    <a href="#">
+      <div class="back-to-top">
+        <img style="transform: rotate(180deg)" src="open.svg" width="auto" height="20px">
+        <p>back to top</p>
+      </div>
+    </a>
     <script>
       $(document).ready(function(){
         var $body = $('.page');
@@ -89,6 +115,7 @@
           var post = $('<div></div>').css({'width':'604px','background-color':'transparent'}).addClass('post-wrapper')
           $(post).appendTo($body);
           var time = $('<div></div>').css({'font-family':'\'Krungthep\'','float':'left','font-size':'18pt','width':'120px','padding':'0 20px 12px 20px','border-bottom':'3px solid #cecece','border-radius':'8px','color':'#cecece','margin-right':'20px'})
+          var time2 = $('<div></div>').css({'font-family':'\'Krungthep\'','float':'left','font-size':'18pt','width':'120px','padding':'0 20px 12px 20px','border-bottom':'3px solid #cecece','border-radius':'8px','color':'#cecece','margin-right':'20px'})
           var date = tweet.created_at
           var name = $('<div></div>').css({'font-family':'\'Krungthep\'','margin-top':'30px','font-size':'18pt','color':'black'}).addClass('name-class')
           var comment = $('<div></div>').css({'font-family':'\'Krungthep\'','width':'340px','margin-top':'12px','margin-left':'200px','padding':'0 30px','border-radius':'22px','border':'2px solid black','overflow':'hidden','font-size':'18pt','color':'black'})
@@ -99,11 +126,13 @@
           $(name).appendTo(post)
           $(comment).appendTo(post)
           index -= 1;
-        }
+        }]
+
+
 
         var currentIndex = streams.home.length - 1
 
-        var twitButton = $('<div><img src="https://www.dropbox.com/s/db7qrddoffvhlkx/at_sign.svg?raw=1" width="auto" height="50px"><p class="get-new-tweets">Get new tweets</p></div>')
+        var twitButton = $('<div><img src="at_sign.svg" width="auto" height="50px"><p class="get-new-tweets">Get new tweets</p></div>')
         $(twitButton).on('click', function() {
           var newIndex = streams.home.length - 1
           for (i = newIndex; i > currentIndex; i--) {
