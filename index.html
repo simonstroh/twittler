@@ -3,25 +3,149 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <style>
+    @font-face {
+      font-family: "Krungthep";
+      src: url('Krungthep.ttf') format('truetype');
+    }
+    .wrapper {
+      width: 604px;
+      background-color: transparent;
+    }
+    .time-value {
+      font-family: "Krungthep";
+      float: left;
+      font-size: 20pt;
+      width: 120px;
+      height: 60px;
+      padding: 10px 20px 5px 20px;
+      border-bottom: 2px solid #cecece;
+      color: #cecece;
+      margin-right: 20px;
+    }
+    .name-value {
+      font-family: "Krungthep";
+      margin-top: 30px;
+      font-size: 18pt;
+      color: black;
+    }
+    .name-value img {
+      float: left;
+      margin-top: 6px;
+      margin-right: 8px;
+    }
+    img:hover {
+      opacity: 0.4;
+    }
+    .name-value p {
+      padding: 0;
+      margin: 0;
+    }
+    .comment-value {
+      font-family: "Krungthep";
+      width: 340px;
+      margin-top: 10px;
+      margin-left: 200px;
+      padding: 0 30px;
+      border-radius: 22px;
+      border: 2px solid black;
+      overflow: hidden;
+      font-size: 18pt;
+      color: black;
+    }
+    </style>
   </head>
   <body>
     <script>
-
       $(document).ready(function(){
         var $body = $('body');
-        $body.html('');
-
         var index = streams.home.length - 1;
+        var sum = 0
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
+          var post = $('<div></div>').css({'width':'604px','background-color':'transparent'}).addClass('post-wrapper')
+          $(post).appendTo($body);
+          var time = $('<div></div>').css({'font-family':'\'Krungthep\'','float':'left','font-size':'20pt','width':'120px','height':'60px','padding':'10px 20px 5px 20px','border-bottom':'3px solid #cecece','color':'#cecece','margin-right':'20px'})
+          var date = tweet.created_at
+          var name = $('<div></div>').css({'font-family':'\'Krungthep\'','margin-top':'30px','font-size':'18pt','color':'black'}).addClass('name-class')
+          $(name).find('img').css({'float':'left','margin-top':'6px','margin-right':'8px'})
+          var comment = $('<div></div>').css({'font-family':'\'Krungthep\'','width':'340px','margin-top':'12px','margin-left':'200px','padding':'0 30px','border-radius':'22px','border':'2px solid black','overflow':'hidden','font-size':'18pt','color':'black'})
+          $(time).text(date.toLocaleTimeString('it-IT'))
+          $(name).text('@' + tweet.user + ' -')
+          $(comment).text(tweet.message)
+          $(time).appendTo(post)
+          $(name).appendTo(post)
+          $(comment).appendTo(post)
           index -= 1;
         }
 
+        var currentIndex = streams.home.length - 1
+
+        var twitButton = $('<div>Get new tweets</div>')
+        $(twitButton).on('click', function() {
+          var newIndex = streams.home.length - 1
+          for (i = newIndex; i > currentIndex; i--) {
+            var tweet = streams.home[i];
+            var post = $('<div></div>').css({'width':'604px','background-color':'transparent'})
+            $(post).appendTo($body);
+            var time = $('<div></div>').css({'font-family':'\'Krungthep\'','float':'left','font-size':'20pt','width':'120px','height':'60px','padding':'10px 20px 5px 20px','border-bottom':'3px solid #cecece','color':'#cecece','margin-right':'20px'})
+            var date = tweet.created_at
+            var name = $('<div></div>').css({'font-family':'\'Krungthep\'','margin-top':'30px','font-size':'18pt','color':'black'})
+            $(name).find('img').css({'float':'left','margin-top':'6px','margin-right':'8px'})
+            var comment = $('<div></div>').css({'font-family':'\'Krungthep\'','width':'340px','margin-top':'12px','margin-left':'200px','padding':'0 30px','border-radius':'22px','border':'2px solid black','overflow':'hidden','font-size':'18pt','color':'black'})
+            $(time).text(date.toLocaleTimeString('it-IT'))
+            $(name).text('@' + tweet.user + ' -')
+            $(comment).text(tweet.message)
+            $(time).appendTo(post)
+            $(name).appendTo(post)
+            $(comment).appendTo(post)
+          }
+        })
+
+        $('.name-class').on('click', function() {
+          var thisText = $(this).text()
+          var newArray = []
+          console.log(thisText.slice(1, thisText.length - 2))
+          for (i = 0; i < sum; i++) {
+            if (thisText !== $('.name-class')[i].innerHTML) {
+              $(this).parent().hide()
+            }
+            var indexedItem = $('.name-class')[i]
+            if (thisText !== indexedItem.innerHTML) {
+              newArray.push(i)
+            }
+          }
+          console.log(newArray)
+        })
+
+        $body.prepend(twitButton)
+
+        //Alternative method is to use setTimeout and a for loop up to a million seconds
       });
 
+      $(window).scroll(function() {
+        if($(window).scrollTop() + $(window).height() == $(document).height()) {
+          $(window).load(function() {
+            var newIndex = streams.home.length - 1
+            for (i = newIndex; i > currentIndex; i--) {
+              var tweet = streams.home[i];
+              var post = $('<div></div>').css({'width':'604px','background-color':'transparent'})
+              $(post).appendTo($body);
+              var time = $('<div></div>').css({'font-family':'\'Krungthep\'','float':'left','font-size':'20pt','width':'120px','height':'60px','padding':'10px 20px 5px 20px','border-bottom':'2px solid #cecece','color':'#cecece','margin-right':'20px'})
+              var date = tweet.created_at
+              var name = $('<div></div>').css({'font-family':'\'Krungthep\'','margin-top':'30px','font-size':'18pt','color':'black'})
+              $(name).find('img').css({'float':'left','margin-top':'6px','margin-right':'8px'})
+              var comment = $('<div></div>').css({'font-family':'\'Krungthep\'','width':'340px','margin-top':'10px','margin-left':'200px','padding':'0 30px','border-radius':'22px','border':'2px solid black','overflow':'hidden','font-size':'18pt','color':'black'})
+              $(time).text(date.toLocaleTimeString('it-IT'))
+              $(name).text(tweet.user + " -")
+              $(comment).text(tweet.message)
+              $(time).appendTo(post)
+              $(name).appendTo(post)
+              $(comment).appendTo(post)
+            }
+          })
+        }
+      });
     </script>
   </body>
 </html>
