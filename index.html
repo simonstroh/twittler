@@ -148,10 +148,10 @@
         var twitButton = $('<div><p class="get-new-tweets">Get new tweets</p></div>')
         $(twitButton).on('click', function() {
           var newIndex = streams.home.length - 1
-          for (i = newIndex; i > currentIndex; i--) {
+          for (i = currentIndex + 1; i < newIndex; i++) {
             var tweet = streams.home[i];
             var post = $('<div></div>').css({'width':'564px','background-color':'transparent'})
-            $(post).appendTo($body);
+            $(post).prependTo($body);
             var time = $('<div></div>').css({'font-family':'\'Krungthep\'','float':'left','font-size':'18pt','width':'120px','height':'60px','padding':'0 20px 12px 20px','border-bottom':'3px solid #cecece','border-radius':'8px','color':'#cecece','margin-right':'20px'})
             var date = tweet.created_at
             var name = $('<div></div>').css({'font-family':'\'Krungthep\'','margin-top':'30px','font-size':'18pt','color':'black'})
