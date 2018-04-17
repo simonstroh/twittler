@@ -173,6 +173,7 @@
         $('.shawndrost').on('click', function() {
           var mySideNav = $('ol')
           var thisTimeline = streams.users.shawndrost
+          $(this).parent().find('.comment').hide()
           for (var i = 0; i < thisTimeline.length; i++) {
             var thisMessage = thisTimeline[i].message
             var thisTime = thisTimeline[i].created_at.toLocaleTimeString('en-US')
